@@ -49,8 +49,8 @@ while website != "https://en.wikipedia.org/wiki/Philosophy":
     Find first link in main body that is not an invalid link and we have not visited already
     """
     link = None
-    for p in body.find_all('p'):
-        for l in p.find_all('a', attrs={'href': re.compile("^/wiki/")}, limit=10):
+    for p in body.find_all('p', limit=10):
+        for l in p.find_all('a', attrs={'href': re.compile("^/wiki/")}):
             if validWikiArticleLinkString(l.get('href')) and WIKI_LINK+l.get('href') not in visited:
                 link = l
                 break
